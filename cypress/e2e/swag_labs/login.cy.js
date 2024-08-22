@@ -212,8 +212,8 @@ describe ('Login test', ()=>{
     });
     
     
-    // Valid login with standard user
-    it('Valid login with standard user with valid password',()=>{
+    // page assertion after login
+    it.only('page assertion after login',()=>{
         // cy.visit('https://www.saucedemo.com/');
         // cy.url().should('eq', 'https://www.saucedemo.com/');
 
@@ -226,38 +226,46 @@ describe ('Login test', ()=>{
         cy.get('#login-button').click();
 
         cy.url().should('include','/inventory.html');
-        cy.get('#react-burger-menu-btn').should('be.visible').and('be.enabled');
         cy.contains('Swag Labs');
+        cy.get('#react-burger-menu-btn').should('be.visible').and('be.enabled');
         cy.get('#shopping_cart_container').should('be.visible');
-        cy.get('.title').should('have.text', 'Products');
-        cy.get('select[data-test="product-sort-container"]').should('be.enabled').and('be.visible');
+        cy.get('span[data-test="title"]').should('have.text', 'Products');
+        cy.get('select[data-test="product-sort-container"]').should('be.visible').and('be.enabled');
 
 
         //Items should be visible
-        cy.get('div[data-test="inventory-item-name"]').eq(0).should('contain', 'Sauce Labs Backpack');
+        cy.get('div[data-test="inventory-item-name"]').eq(0).should('have.text', 'Sauce Labs Backpack');
         cy.get('#item_4_title_link').should('be.visible');
         cy.get('div[data-test="inventory-item-desc"]').should('contain', 'carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.');
         cy.get('div[data-test="inventory-item-price"]').should('contain', '$29.99');
-        cy.get('#add-to-cart-sauce-labs-backpack').should('be.visible');
-        cy.get('div[data-test="inventory-item-name"]').eq(3).should('have.text','Sauce Labs Fleece Jacket');
-        cy.get('#item_5_title_link').should('be.visible');
-        cy.get('div[data-test="inventory-item-desc"]').should('contain',"It's not every day that you come across a midweight quarter-zip fleece jacket capable of handling everything from a relaxing day outdoors to a busy day at the office");
-        cy.get('div[data-test="inventory-item-price"]').should('contain','$49.99');
-        cy.get('#add-to-cart-sauce-labs-fleece-jacket').should('be.visible');
+        cy.get('#add-to-cart-sauce-labs-backpack').should('be.visible')
+        .and('have.text', 'Add to cart')
+        .and('be.enabled');
 
 
         //scroll down
         cy.scrollTo('bottom');
         cy.get('.footer').should('be.visible');
 
+        cy.get('#item_3_img_link').should('be.visible');
+        cy.get('div[data-test="inventory-item-name"]').eq(5).should('have.text','Test.allTheThings() T-Shirt (Red)');
+        cy.get('div[data-test="inventory-item-desc"]').should('contain',"It's not every day that you come across a midweight quarter-zip fleece jacket capable of handling everything from a relaxing day outdoors to a busy day at the office");
+        cy.get('div[data-test="inventory-item-price"]').should('contain','$49.99');
+        cy.get('button[data-test="add-to-cart-test.allthethings()-t-shirt-(red)"]').should('be.visible')
+        .and('have.text', 'Add to cart')
+        .and('be.enabled');
+
+
+        cy.get('div[class="app_logo"]').scrollIntoView();
+
+        
+
 
         // Logout
         cy.get('#react-burger-menu-btn').should('be.visible')
-        .and('be.enabled')
-        .click();
+        .and('be.enabled').click();
 
-        cy.get('#logout_sidebar_link').should('be.visible')
-        .and('have.text','Logout')
+        cy.get('a#logout_sidebar_link').should('have.text','Logout')
         .and('have.attr', 'href', '#')
         .click();
 

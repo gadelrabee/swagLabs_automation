@@ -1,4 +1,10 @@
+import  login_credential from  "../../fixtures/login_credentials/login_credential.json"
+import { loginSelectors } from "../../support/selectors/loginSelectors";
+import { log } from "async";
+
 describe ('Login test', ()=>{
+
+    
     
     beforeEach(()=>{
         
@@ -7,28 +13,33 @@ describe ('Login test', ()=>{
         cy.contains('Swag Labs');
             
         // placeholders should be visible and clickable
-        cy.get('input[name="user-name"]').should('have.attr', 'placeholder', 'Username').and('be.enabled');
-        cy.get('input[name="password"]').should('have.attr', 'placeholder', 'Password').and('be.enabled');
-        cy.get('input[name="login-button"]').should('have.value', 'Login').and('be.enabled');
+        cy.get(loginSelectors.userName).should('have.attr', 'placeholder', 'Username').and('be.enabled');
+        cy.get(loginSelectors.passWord).should('have.attr', 'placeholder', 'Password').and('be.enabled');
+        cy.get(loginSelectors.loginButton).should('have.value', 'Login').and('be.enabled');
+        
         
     });
         
-    
 
+
+    
        
      
     //login with incorrect username
     it('login with incorrect username',()=>{
         // cy.visit('https://www.saucedemo.com/');
 
-        cy.get('#user-name').clear()
+        cy.get(loginSelectors.userName).clear()
         .type("Tester");
 
-        cy.get('#password').clear()
+        cy.get(loginSelectors.passWord).clear()
         .type("secret_sauce");
 
-        cy.get('#login-button').click();
+        cy.get(loginSelectors.loginButton).click();
         cy.get('h3').should('have.text','Epic sadface: Username and password do not match any user in this service');
+
+    
+
     });
 
 
@@ -36,30 +47,34 @@ describe ('Login test', ()=>{
     it('valid username and invalid paswword',()=>{
         // cy.visit('https://www.saucedemo.com/');
 
-        cy.get('#user-name').clear()
-        .type("standard_user");
+        cy.get(loginSelectors.userName).clear()
+        .type('standard_user');
 
-        cy.get('#password').clear()
+        cy.get(loginSelectors.passWord).clear()
         .type("TESTEETR");
 
-        cy.get('#login-button').click();
+        cy.get(loginSelectors.loginButton).click();
         cy.get('h3').should('have.text','Epic sadface: Username and password do not match any user in this service');
+
+    
+
     });
 
 
     // login with empty username and valid password
     it("login with empty username and valid password", ()=>{
-        cy.get("#user-name").clear();
+        cy.get(loginSelectors.userName).clear();
 
-        cy.get('#password').clear()
+        cy.get(loginSelectors.passWord).clear()
         .type('secret_sauce');
 
-        cy.get('#login-button').click();
+        cy.get(loginSelectors.loginButton).click();
         cy.get('h3').should('have.text', 'Epic sadface: Username is required');
-        cy.get('button[data-test="error-button"]').should('be.visible')
+        cy.get(loginSelectors.errorButton).should('be.visible')
         .and('be.enabled')
         .click();
-        cy.get('form').should('not.contain','Epic sadface: Username is required');
+        cy.get(loginSelectors.form).should('not.contain','Epic sadface: Username is required');
+
 
     });
 
@@ -68,18 +83,20 @@ describe ('Login test', ()=>{
     // login with valid user name and empty password
     it('login with valid username and empty password',()=>{
 
-        cy.get('#user-name').clear()
+        cy.get(loginSelectors.userName).clear()
         .type('standard_user');
 
-        cy.get('#password').clear();
+        cy.get(loginSelectors.passWord).clear();
 
-        cy.get('#login-button').click();
+        cy.get(loginSelectors.loginButton).click();
 
         cy.get('h3').should('have.text', 'Epic sadface: Password is required');
-        cy.get('button[data-test="error-button"]').should('be.visible')
+        cy.get(loginSelectors.errorButton).should('be.visible')
         .and('be.enabled')
         .click();
-        cy.get('form').should('not.contain','Epic sadface: Password is required');
+        cy.get(loginSelectors.form).should('not.contain','Epic sadface: Password is required');
+
+        
         
 
     });
@@ -89,18 +106,20 @@ describe ('Login test', ()=>{
      // login with empty username and password
      it('login with empty username and password',()=>{
 
-        cy.get('#user-name').clear();
+        cy.get(loginSelectors.userName).clear();
 
-        cy.get('#password').clear();
+        cy.get(loginSelectors.passWord).clear();
 
-        cy.get('#login-button').click();
+        cy.get(loginSelectors.loginButton).click();
 
         cy.get('h3').should('have.text', 'Epic sadface: Username is required');
-        cy.get('button[data-test="error-button"]').should('be.visible')
+        cy.get(loginSelectors.errorButton).should('be.visible')
         .and('be.enabled')
         .click();
-        cy.get('form').should('not.contain','Epic sadface: Username is required');
+        cy.get(loginSelectors.form).should('not.contain','Epic sadface: Username is required');
         
+
+
 
     });
     
@@ -110,19 +129,20 @@ describe ('Login test', ()=>{
     it('Login with locked_out_user',()=>{
         // cy.visit('https://www.saucedemo.com/');
 
-        cy.get('#user-name').clear()
+        cy.get(loginSelectors.userName).clear()
         .type("locked_out_user");
 
-        cy.get('#password').clear()
-        .type("secret_sauce");
+        cy.get(loginSelectors.passWord).clear()
+        .type('secret_sauce');
 
-        cy.get('#login-button').click();
+        cy.get(loginSelectors.loginButton).click();
 
         cy.get('h3').should('have.text', 'Epic sadface: Sorry, this user has been locked out.');
-        cy.get('button[data-test="error-button"]').should('be.visible')
+        cy.get(loginSelectors.errorButton).should('be.visible')
         .and('be.enabled')
         .click();
-        cy.get('form').should('not.contain','Epic sadface: Sorry, this user has been locked out.'); 
+        cy.get(loginSelectors.form).should('not.contain','Epic sadface: Sorry, this user has been locked out.'); 
+
 
 
     });
@@ -132,18 +152,20 @@ describe ('Login test', ()=>{
     it('Login with problem_user',()=>{
         // cy.visit('https://www.saucedemo.com/');
 
-        cy.get('#user-name').clear()
+        cy.get(loginSelectors.userName).clear()
         .type("problem_user");
 
-        cy.get('#password').clear()
-        .type("secret_sauce");
+        cy.get(loginSelectors.passWord).clear()
+        .type('secret_sauce');
 
-        cy.get('#login-button').click();
+        cy.get(loginSelectors.loginButton).click();
 
         cy.url().should('include', '/inventory.html');
-        cy.get('.app_logo').should('have.text', 'Swag Labs');
-        cy.get('span[data-test="title"]').should('have.text', 'Products');
-        cy.get('img[data-test="inventory-item-sauce-labs-backpack-img"]').should('be.visible');
+        cy.get(loginSelectors.appLogo).should('have.text', 'Swag Labs');
+        cy.get(loginSelectors.title).should('have.text', 'Products');
+        cy.get(loginSelectors.backPackImg).should('be.visible');
+
+       
 
     });
 
@@ -153,19 +175,20 @@ describe ('Login test', ()=>{
     it('Login with performance_glitch_user',()=>{
         // cy.visit('https://www.saucedemo.com/');
 
-        cy.get('#user-name').clear()
+        cy.get(loginSelectors.userName).clear()
         .type("performance_glitch_user");
 
-        cy.get('#password').clear()
-        .type("secret_sauce");
+        cy.get(loginSelectors.passWord).clear()
+        .type('secret_sauce');
 
-        cy.get('#login-button').click();
+        cy.get(loginSelectors.loginButton).click();
 
         cy.url().should('include', '/inventory.html');
-        cy.get('.app_logo').should('have.text', 'Swag Labs');
-        cy.get('span[data-test="title"]').should('have.text', 'Products');
-        cy.get('img[data-test="inventory-item-sauce-labs-backpack-img"]').should('be.visible');
+        cy.get(loginSelectors.appLogo).should('have.text', 'Swag Labs');
+        cy.get(loginSelectors.title).should('have.text', 'Products');
+        cy.get(loginSelectors.backPackImg).should('be.visible');
 
+        
 
     });
 
@@ -175,18 +198,20 @@ describe ('Login test', ()=>{
     it('Login with error_user',()=>{
         // cy.visit('https://www.saucedemo.com/');
         
-        cy.get('#user-name').clear()
+        cy.get(loginSelectors.userName).clear()
         .type("error_user");
 
-        cy.get('#password').clear()
-        .type("secret_sauce");
+        cy.get(loginSelectors.passWord).clear()
+        .type('secret_sauce');
 
-        cy.get('#login-button').click();
+        cy.get(loginSelectors.loginButton).click();
 
         cy.url().should('include', '/inventory.html');
-        cy.get('.app_logo').should('have.text', 'Swag Labs');
-        cy.get('span[data-test="title"]').should('have.text', 'Products');
-        cy.get('img[data-test="inventory-item-sauce-labs-backpack-img"]').should('be.visible');
+        cy.get(loginSelectors.appLogo).should('have.text', 'Swag Labs');
+        cy.get(loginSelectors.title).should('have.text', 'Products');
+        cy.get(loginSelectors.backPackImg).should('be.visible');
+
+    
 
 
     });
@@ -196,18 +221,18 @@ describe ('Login test', ()=>{
     it('Login with visual_user',()=>{
         // cy.visit('https://www.saucedemo.com/');
 
-        cy.get('#user-name').clear()
+        cy.get(loginSelectors.userName).clear()
         .type("visual_user");
 
-        cy.get('#password').clear()
-        .type("secret_sauce");
+        cy.get(loginSelectors.passWord).clear()
+        .type('secret_sauce');
 
-        cy.get('#login-button').click();
+        cy.get(loginSelectors.loginButton).click();
 
         cy.url().should('include', '/inventory.html');
-        cy.get('.app_logo').should('have.text', 'Swag Labs');
-        cy.get('span[data-test="title"]').should('have.text', 'Products');
-        cy.get('img[data-test="inventory-item-sauce-labs-backpack-img"]').should('be.visible');
+        cy.get(loginSelectors.appLogo).should('have.text', 'Swag Labs');
+        cy.get(loginSelectors.title).should('have.text', 'Products');
+        cy.get(loginSelectors.backPackImg).should('be.visible');
 
     });
     
@@ -217,55 +242,55 @@ describe ('Login test', ()=>{
         // cy.visit('https://www.saucedemo.com/');
         // cy.url().should('eq', 'https://www.saucedemo.com/');
 
-        cy.get('#user-name').clear()
-        .type("standard_user");
+        cy.get(loginSelectors.userName).clear()
+        .type('standard_user');
 
-        cy.get('#password').clear()
-        .type("secret_sauce");
+        cy.get(loginSelectors.passWord).clear()
+        .type('secret_sauce');
 
-        cy.get('#login-button').click();
+        cy.get(loginSelectors.loginButton).click();
 
         cy.url().should('include','/inventory.html');
-        cy.contains('Swag Labs');
-        cy.get('#react-burger-menu-btn').should('be.visible').and('be.enabled');
-        cy.get('#shopping_cart_container').should('be.visible');
-        cy.get('span[data-test="title"]').should('have.text', 'Products');
-        cy.get('select[data-test="product-sort-container"]').should('be.visible').and('be.enabled');
+        cy.get(loginSelectors.appLogo).should('have.text', 'Swag Labs');
+        cy.get(loginSelectors.burgerMenu).should('be.visible').and('be.enabled');
+        cy.get(loginSelectors.shoppingCartContainer).should('be.visible');
+        cy.get(loginSelectors.title).should('have.text', 'Products');
+        cy.get(loginSelectors.productSort).should('be.visible').and('be.enabled');
 
 
         //Items should be visible
-        cy.get('div[data-test="inventory-item-name"]').eq(0).should('have.text', 'Sauce Labs Backpack');
-        cy.get('#item_4_title_link').should('be.visible');
-        cy.get('div[data-test="inventory-item-desc"]').should('contain', 'carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.');
-        cy.get('div[data-test="inventory-item-price"]').should('contain', '$29.99');
-        cy.get('#add-to-cart-sauce-labs-backpack').should('be.visible')
+        cy.get(loginSelectors.itemName).eq(0).should('have.text', 'Sauce Labs Backpack');
+        cy.get(loginSelectors.backPackImg).should('be.visible');
+        cy.get(loginSelectors.itemDescription).should('contain', 'carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.');
+        cy.get(loginSelectors.itemPrice).should('contain', '$29.99');
+        cy.get(loginSelectors.backpackAddToCart).should('be.visible')
         .and('have.text', 'Add to cart')
         .and('be.enabled');
 
 
         //scroll down
-        cy.scrollTo('bottom');
-        cy.get('.footer').should('be.visible');
+        cy.scrollTo(loginSelectors.bottom);
+        cy.get(loginSelectors.footer).should('be.visible');
 
-        cy.get('#item_3_img_link').should('be.visible');
-        cy.get('div[data-test="inventory-item-name"]').eq(5).should('have.text','Test.allTheThings() T-Shirt (Red)');
-        cy.get('div[data-test="inventory-item-desc"]').should('contain',"It's not every day that you come across a midweight quarter-zip fleece jacket capable of handling everything from a relaxing day outdoors to a busy day at the office");
-        cy.get('div[data-test="inventory-item-price"]').should('contain','$49.99');
-        cy.get('button[data-test="add-to-cart-test.allthethings()-t-shirt-(red)"]').should('be.visible')
+        cy.get(loginSelectors.redTshirt).should('be.visible');
+        cy.get(loginSelectors.itemName).eq(5).should('have.text','Test.allTheThings() T-Shirt (Red)');
+        cy.get(loginSelectors.itemDescription).should('contain',"This classic Sauce Labs t-shirt is perfect to wear when cozying up to your keyboard to automate a few tests. Super-soft and comfy ringspun combed cotton.");
+        cy.get(loginSelectors.itemPrice).should('contain','$49.99');
+        cy.get(loginSelectors.tshirtAddToCart).should('be.visible')
         .and('have.text', 'Add to cart')
         .and('be.enabled');
 
 
-        cy.get('div[class="app_logo"]').scrollIntoView();
+        cy.get(loginSelectors.appLogo).scrollIntoView();
 
         
 
 
         // Logout
-        cy.get('#react-burger-menu-btn').should('be.visible')
+        cy.get(loginSelectors.burgerMenu).should('be.visible')
         .and('be.enabled').click();
 
-        cy.get('a#logout_sidebar_link').should('have.text','Logout')
+        cy.get(loginSelectors.logOut).should('have.text','Logout')
         .and('have.attr', 'href', '#')
         .click();
 

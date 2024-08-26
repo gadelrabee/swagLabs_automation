@@ -1,6 +1,8 @@
 import { addtocartSelectors } from"../../support/selectors/addToCart";
 import { loginSelectors } from "../../support/selectors/loginSelectors";
 import {text} from "../../support/text_message";
+import login_credential from "../../fixtures/login_credentials.json";
+import checkoutData from "../../fixtures/checkoutData.json";
 
 describe("add product to cart", ()=>{
     it('add products to the cart, remove and checkout', ()=>{
@@ -9,10 +11,10 @@ describe("add product to cart", ()=>{
         cy.visit('https://www.saucedemo.com/');
 
         cy.get(loginSelectors.userName).clear()
-        .type("standard_user");
+        .type(login_credential.username);
 
         cy.get(loginSelectors.passWord).clear()
-        .type('secret_sauce');
+        .type(login_credential.password);
 
         cy.get(loginSelectors.loginButton).click();
 
@@ -243,10 +245,10 @@ describe("add product to cart", ()=>{
         cy.get(addtocartSelectors.firstName).clear();
 
         cy.get(addtocartSelectors.lastName).clear()
-        .type('Gadel');
+        .type(checkoutData.lastname);
 
         cy.get(addtocartSelectors.postalCode).clear()
-        .type('01234');
+        .type(checkoutData.postalcode);
 
         cy.get(addtocartSelectors.continueButton).click();
 
@@ -264,12 +266,12 @@ describe("add product to cart", ()=>{
 
         // checkout with empty last name field
         cy.get(addtocartSelectors.firstName).clear()
-        .type('Rabeendra');
+        .type(checkoutData.firstname);
 
         cy.get(addtocartSelectors.lastName).clear();
 
         cy.get(addtocartSelectors.postalCode).clear()
-        .type('01234');
+        .type(checkoutData.postalcode);
 
         cy.get(addtocartSelectors.continueButton).click();
 
@@ -288,10 +290,10 @@ describe("add product to cart", ()=>{
 
         // checkout with empty ZIP/Postal Code field
         cy.get(addtocartSelectors.firstName).clear()
-        .type('Rabeendra');
+        .type(checkoutData.firstname);
 
         cy.get(addtocartSelectors.lastName).clear()
-        .type('Gadel');
+        .type(checkoutData.lastname);
 
         cy.get(addtocartSelectors.postalCode).clear();
 
@@ -333,13 +335,13 @@ describe("add product to cart", ()=>{
 
         // checkout with valid firstname, lastname and postal code
         cy.get(addtocartSelectors.firstName).clear()
-        .type('Rabeendra');
+        .type(checkoutData.firstname);
 
         cy.get(addtocartSelectors.lastName).clear()
-        .type('Gadel');
+        .type(checkoutData.lastname);
 
         cy.get(addtocartSelectors.postalCode).clear()
-        .type('012345');
+        .type(checkoutData.postalcode);
 
         cy.get(addtocartSelectors.continueButton).click();
 

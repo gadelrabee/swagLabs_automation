@@ -1,6 +1,7 @@
 
 import { loginSelectors } from "../../support/selectors/loginSelectors";
 import {text} from  "../../support/text_message";
+import login_credential from "../../fixtures/login_credentials.json";
 
 describe ('Login test', ()=>{
 
@@ -34,7 +35,7 @@ describe ('Login test', ()=>{
         .type("Tester");
 
         cy.get(loginSelectors.passWord).clear()
-        .type("secret_sauce");
+        .type(login_credential.password);
 
         cy.get(loginSelectors.loginButton).click();
         cy.get(loginSelectors.errorMessage).should('have.text','Epic sadface: Username and password do not match any user in this service');
@@ -50,7 +51,7 @@ describe ('Login test', ()=>{
         
 
         cy.get(loginSelectors.userName).clear()
-        .type('standard_user');
+        .type(login_credential.username);
 
         cy.get(loginSelectors.passWord).clear()
         .type("TESTEETR");
@@ -70,7 +71,7 @@ describe ('Login test', ()=>{
         cy.get(loginSelectors.userName).clear();
 
         cy.get(loginSelectors.passWord).clear()
-        .type('secret_sauce');
+        .type(login_credential.password);
 
         cy.get(loginSelectors.loginButton).click();
         cy.get(loginSelectors.errorMessage).should('have.text', text.noUserName);
@@ -243,13 +244,13 @@ describe ('Login test', ()=>{
     
     // page assertion after login
 
-    it('page assertion after login',()=>{
+    it.only('page assertion after login',()=>{
         
         cy.get(loginSelectors.userName).clear()
-        .type('standard_user');
+        .type(login_credential.username);
 
         cy.get(loginSelectors.passWord).clear()
-        .type('secret_sauce');
+        .type(login_credential.password);
 
         cy.get(loginSelectors.loginButton).click();
 

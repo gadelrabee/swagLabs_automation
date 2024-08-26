@@ -11,10 +11,12 @@ export  const text = {
     noPassword: 'Epic sadface: Password is required',
     lockedOut: 'Epic sadface: Sorry, this user has been locked out.',
     products: 'Products',
-    sauceLanbsBackpack: 'Sauce Labs Backpack',
+    sauceLabsBackpack: 'Sauce Labs Backpack',
+    backPackDesc: 'carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.',
     addToCart: 'Add to cart',
     redTshirt: 'Test.allTheThings() T-Shirt (Red)',
-    logOut: 'Logout',
+    redTshirtDesc: "This classic Sauce Labs t-shirt is perfect to wear when cozying up to your keyboard to automate a few tests. Super-soft and comfy ringspun combed cotton.",
+    logout: 'Logout',
 
 
     //filter texts
@@ -27,7 +29,10 @@ export  const text = {
     highToLow: 'Price (high to low)',
     sauceLabsOnesie: 'Sauce Labs Onesie',
     fleeceJacket: 'Sauce Labs Fleece Jacket',
-    
+    boltTshirt: 'Sauce Labs Bolt T-Shirt',
+    boltTshirtDesc: 'Get your testing superhero on with the Sauce Labs bolt T-shirt. From American Apparel, 100% ringspun combed cotton, heather gray with red bolt.',
+    onesieDesc: "Rib snap infant onesie for the junior automation engineer in development. Reinforced 3-snap bottom closure, two-needle hemmed sleeved and bottom won't unravel.",
+    fleeceJacketDesc: "It's not every day that you come across a midweight quarter-zip fleece jacket capable of handling everything from a relaxing day outdoors to a busy day at the office.",
 
 
     //add to cart texts
@@ -39,9 +44,9 @@ export  const text = {
     four: '4',
     boltTshirt: 'Sauce Labs Bolt T-Shirt',
     thirty: '$29.99',
-    sixteen: '15.99',
-    eight: '7.99',
-    fifty: '49.99',
+    sixteen: '$15.99',
+    eight: '$7.99',
+    fifty: '$49.99',
     yourCart: 'Your Cart',
     qty: 'QTY',
     description: 'Description',
@@ -58,13 +63,14 @@ export  const text = {
     noPostalCode: 'Error: Postal Code is required',
     paymentInformation: 'Payment Information:',
     sauceCard: 'SauceCard #31337',
-    shippingInformation: 'SauceCard #31337',
-    freePony: 'Free Pony Express Delivery!',
+    shippingInformation: 'Shipping Information:',
+    expressDelivery: 'Free Pony Express Delivery!',
     priceTotal: 'Price Total',
     itemTotal: 'Item total: $79.98',
     tax: 'Tax: $6.40',
     total: 'Total: $86.38',
     finish: 'Finish',
+    checkoutOverview: 'Checkout: Overview',
     checkoutComplete:  'Checkout: Complete!',
     thankYouMessage:  'Thank you for your order!',
     dispatchMessage: 'Your order has been dispatched, and will arrive just as fast as the pony can get there!',

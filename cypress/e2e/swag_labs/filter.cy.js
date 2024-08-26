@@ -1,5 +1,6 @@
 import { loginSelectors } from "../../support/selectors/loginSelectors";
 import {filterSelectors} from "../../support/selectors/filterSelectors";
+import {text} from "../../support/text_message";
 
 describe("filter products", () => {
     it("should list the products in the page according to the filter applied", () => {
@@ -23,23 +24,23 @@ describe("filter products", () => {
       cy.get(filterSelectors.inventorySiderBar).should("exist")
       .and("be.visible")
       .and("have.attr", "href", "#")
-      .and('have.text', 'All Items');
+      .and('have.text', text.allItems);
   
       cy.get(filterSelectors.aboutSideBar).should("exist")
       .and("be.visible")
       .and("have.attr", "href", "https://saucelabs.com/")
-      .and('have.text', 'About');
+      .and('have.text', text.about);
   
   
       cy.get(filterSelectors.logoutSiderBar).should("exist")
       .and("be.visible")
       .and("have.attr", "href", "#")
-      .and('have.text', 'Logout');
+      .and('have.text', text.logout);
   
       cy.get(filterSelectors.resetSideBar).should("exist")
       .and("be.visible")
       .and("have.attr", "href", "#")
-      .and('have.text', 'Reset App State');
+      .and('have.text', text.resetAppState);
   
   
       cy.get(filterSelectors.burgerCrossBtn).should('be.enabled').click();
@@ -50,40 +51,40 @@ describe("filter products", () => {
       // product sort assesrtion
       cy.get(loginSelectors.productSort).should('be.visible').and('be.enabled');
       cy.get(filterSelectors.selectContainer).click();
-      cy.get(filterSelectors.option).eq(0).should('have.text', 'Name (A to Z)');
-      cy.get(filterSelectors.option).eq(1).should('have.text', 'Name (Z to A)');
-      cy.get(filterSelectors.option).eq(2).should('have.text', 'Price (low to high)');
-      cy.get(filterSelectors.option).eq(3).should('have.text', 'Price (high to low)');
+      cy.get(filterSelectors.option).eq(0).should('have.text', text.aToz);
+      cy.get(filterSelectors.option).eq(1).should('have.text', text.zToa);
+      cy.get(filterSelectors.option).eq(2).should('have.text', text.lowToHigh);
+      cy.get(filterSelectors.option).eq(3).should('have.text', text.highToLow);
   
   
-      cy.get(loginSelectors.productSort).select("za");
-      cy.get(loginSelectors.itemName).eq(0).should('have.text', 'Test.allTheThings() T-Shirt (Red)');
+      cy.get(loginSelectors.productSort).select(filterSelectors.za);
+      cy.get(loginSelectors.itemName).eq(0).should('have.text', text.redTshirt);
       cy.scrollTo(loginSelectors.bottom);
       cy.get(loginSelectors.backPackImg).should("be.visible");
       cy.get(loginSelectors.appLogo).scrollIntoView();
-      cy.get(loginSelectors.itemName).eq(5).should('have.text', 'Sauce Labs Backpack');
+      cy.get(loginSelectors.itemName).eq(5).should('have.text', text.sauceLabsBackpack);
   
   
-      cy.get(loginSelectors.productSort).select("lohi");
-      cy.get(loginSelectors.itemName).eq(0).should('have.text', 'Sauce Labs Onesie');
+      cy.get(loginSelectors.productSort).select(filterSelectors.lohi);
+      cy.get(loginSelectors.itemName).eq(0).should('have.text', text.sauceLabsOnesie);
       cy.scrollTo(loginSelectors.bottom);
-      cy.get(loginSelectors.itemName).eq(5).should('have.text', 'Sauce Labs Fleece Jacket');
+      cy.get(loginSelectors.itemName).eq(5).should('have.text', text.fleeceJacket);
       cy.get(loginSelectors.productSort).scrollIntoView();
       cy.get(loginSelectors.appLogo).should("be.visible");
   
   
-      cy.get(loginSelectors.productSort).select("hilo");
-      cy.get(loginSelectors.itemName).eq(0).should('have.text', 'Sauce Labs Fleece Jacket');
+      cy.get(loginSelectors.productSort).select(filterSelectors.hilo);
+      cy.get(loginSelectors.itemName).eq(0).should('have.text', text.fleeceJacket);
       cy.scrollTo(loginSelectors.bottom);
-      cy.get(loginSelectors.itemName).eq(5).should('have.text', 'Sauce Labs Onesie');
+      cy.get(loginSelectors.itemName).eq(5).should('have.text', text.sauceLabsOnesie);
       cy.get(loginSelectors.productSort).scrollIntoView();
       cy.get(loginSelectors.appLogo).should("be.visible");
   
   
-      cy.get(loginSelectors.productSort).select("az");
-      cy.get(loginSelectors.itemName).eq(0).should('have.text', 'Sauce Labs Backpack');
+      cy.get(loginSelectors.productSort).select(filterSelectors.az);
+      cy.get(loginSelectors.itemName).eq(0).should('have.text', text.sauceLabsBackpack);
       cy.scrollTo(loginSelectors.bottom);
-      cy.get(loginSelectors.itemName).eq(5).should('have.text', 'Test.allTheThings() T-Shirt (Red)');
+      cy.get(loginSelectors.itemName).eq(5).should('have.text', text.redTshirt);
       cy.get(loginSelectors.appLogo).scrollIntoView()
       .and("be.visible");
       

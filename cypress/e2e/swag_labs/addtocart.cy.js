@@ -1,5 +1,6 @@
-const { addtocartSelectors } = require("../../support/selectors/addToCart");
-const { loginSelectors } = require("../../support/selectors/loginSelectors");
+import { addtocartSelectors } from"../../support/selectors/addToCart";
+import { loginSelectors } from "../../support/selectors/loginSelectors";
+import {text} from "../../support/text_message";
 
 describe("add product to cart", ()=>{
     it('add products to the cart, remove and checkout', ()=>{
@@ -23,25 +24,25 @@ describe("add product to cart", ()=>{
         .click()
 
         cy.url().should('include', '/inventory-item.html?id=4');
-        cy.get(loginSelectors.appLogo).should('have.text', 'Swag Labs');
-        cy.get(addtocartSelectors.secondaryHeader).should('have.text', 'Back to products')
+        cy.get(loginSelectors.appLogo).should('have.text', text.swagLabs);
+        cy.get(addtocartSelectors.secondaryHeader).should('have.text', text.backToProducts)
         .and('be.visible')
         .and('not.be.disabled');
         cy.get(addtocartSelectors.backPackImg).should('be.visible');
-        cy.get(loginSelectors.itemName).should('have.text','Sauce Labs Backpack');
-        cy.get(loginSelectors.itemDescription).should('have.text', 'carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.');
-        cy.get(loginSelectors.itemPrice).should('have.text', '$29.99');
+        cy.get(loginSelectors.itemName).should('have.text',text.sauceLabsBackpack);
+        cy.get(loginSelectors.itemDescription).should('have.text', text.backPackDesc);
+        cy.get(loginSelectors.itemPrice).should('have.text', text.thirty);
 
         cy.get(addtocartSelectors.addToCart).should('be.visible')
-        .and('have.text', 'Add to cart')
+        .and('have.text', text.addToCart)
         .and('be.enabled')
         .click();
 
         cy.get(addtocartSelectors.removeButton).should('be.visible')
-        .and('have.text', 'Remove')
+        .and('have.text', text.remove)
         .and('be.enabled');
 
-        cy.get(addtocartSelectors.cartBadge).should('have.text', '1');
+        cy.get(addtocartSelectors.cartBadge).should('have.text', text.one);
 
         cy.go('back');
 
@@ -51,23 +52,23 @@ describe("add product to cart", ()=>{
         .click()
 
         cy.url().should('include', '/inventory-item.html?id=1');
-        cy.get(loginSelectors.appLogo).should('have.text', 'Swag Labs');
-        cy.get(addtocartSelectors.secondaryHeader).should('have.text', 'Back to products');
+        cy.get(loginSelectors.appLogo).should('have.text', text.swagLabs);
+        cy.get(addtocartSelectors.secondaryHeader).should('have.text', text.backToProducts);
         cy.get(addtocartSelectors.boltTshirtImg).should('be.visible');
-        cy.get(loginSelectors.itemName).should('have.text','Sauce Labs Bolt T-Shirt');
-        cy.get(loginSelectors.itemDescription).should('have.text', 'Get your testing superhero on with the Sauce Labs bolt T-shirt. From American Apparel, 100% ringspun combed cotton, heather gray with red bolt.');
-        cy.get(loginSelectors.itemPrice).should('have.text', '$15.99');
+        cy.get(loginSelectors.itemName).should('have.text',text.boltTshirt);
+        cy.get(loginSelectors.itemDescription).should('have.text', text.boltTshirtDesc);
+        cy.get(loginSelectors.itemPrice).should('have.text', text.sixteen);
 
         cy.get(addtocartSelectors.addToCart).should('be.visible')
-        .and('have.text', 'Add to cart')
+        .and('have.text', text.addToCart)
         .and('be.enabled')
         .click();
 
         cy.get(addtocartSelectors.removeButton).should('be.visible')
-        .and('have.text', 'Remove')
+        .and('have.text', text.remove)
         .and('be.enabled');
 
-        cy.get(addtocartSelectors.cartBadge).should('have.text', '2');
+        cy.get(addtocartSelectors.cartBadge).should('have.text', text.two);
 
         cy.go('back');
 
@@ -82,23 +83,23 @@ describe("add product to cart", ()=>{
         .click()
 
         cy.url().should('include', '/inventory-item.html?id=2');
-        cy.get(loginSelectors.appLogo).should('have.text', 'Swag Labs');
-        cy.get(addtocartSelectors.secondaryHeader).should('have.text', 'Back to products');
+        cy.get(loginSelectors.appLogo).should('have.text', text.swagLabs);
+        cy.get(addtocartSelectors.secondaryHeader).should('have.text', text.backToProducts);
         cy.get(addtocartSelectors.onesieImg).should('be.visible');
-        cy.get(loginSelectors.itemName).should('have.text','Sauce Labs Onesie');
-        cy.get(loginSelectors.itemDescription).should('have.text', "Rib snap infant onesie for the junior automation engineer in development. Reinforced 3-snap bottom closure, two-needle hemmed sleeved and bottom won't unravel.");
-        cy.get(loginSelectors.itemPrice).should('have.text', '$7.99');
+        cy.get(loginSelectors.itemName).should('have.text',text.sauceLabsOnesie);
+        cy.get(loginSelectors.itemDescription).should('have.text', text.onesieDesc);
+        cy.get(loginSelectors.itemPrice).should('have.text', text.eight);
 
         cy.get(addtocartSelectors.addToCart).should('be.visible')
-        .and('have.text', 'Add to cart')
+        .and('have.text', text.addToCart)
         .and('be.enabled')
         .click();
 
         cy.get(addtocartSelectors.removeButton).should('be.visible')
-        .and('have.text', 'Remove')
+        .and('have.text', text.remove)
         .and('be.enabled');
 
-        cy.get(addtocartSelectors.cartBadge).should('have.text', '3');
+        cy.get(addtocartSelectors.cartBadge).should('have.text', text.three);
 
         cy.go('back');
 
@@ -107,23 +108,23 @@ describe("add product to cart", ()=>{
         .click()
 
         cy.url().should('include', '/inventory-item.html?id=5');
-        cy.get(loginSelectors.appLogo).should('have.text', 'Swag Labs');
-        cy.get(addtocartSelectors.secondaryHeader).should('have.text', 'Back to products');
+        cy.get(loginSelectors.appLogo).should('have.text', text.swagLabs);
+        cy.get(addtocartSelectors.secondaryHeader).should('have.text', text.backToProducts);
         cy.get(addtocartSelectors.fleeceJacketImg).should('be.visible');
-        cy.get(loginSelectors.itemName).should('have.text','Sauce Labs Fleece Jacket');
-        cy.get(loginSelectors.itemDescription).should('have.text', "It's not every day that you come across a midweight quarter-zip fleece jacket capable of handling everything from a relaxing day outdoors to a busy day at the office.");
-        cy.get(loginSelectors.itemPrice).should('have.text', '$49.99');
+        cy.get(loginSelectors.itemName).should('have.text', text.fleeceJacket);
+        cy.get(loginSelectors.itemDescription).should('have.text', text.fleeceJacketDesc);
+        cy.get(loginSelectors.itemPrice).should('have.text', text.fifty);
 
         cy.get(addtocartSelectors.addToCart).should('be.visible')
-        .and('have.text', 'Add to cart')
+        .and('have.text', text.addToCart)
         .and('be.enabled')
         .click();
 
         cy.get(addtocartSelectors.removeButton).should('be.visible')
-        .and('have.text', 'Remove')
+        .and('have.text', text.remove)
         .and('be.enabled');
 
-        cy.get(addtocartSelectors.cartBadge).should('have.text', '4');
+        cy.get(addtocartSelectors.cartBadge).should('have.text', text.four);
 
         cy.go('back');
 
@@ -131,25 +132,25 @@ describe("add product to cart", ()=>{
         //remove two product form the cart
         cy.get(loginSelectors.shoppingCartContainer).click();
         cy.url().should('include', '/cart.html');
-        cy.get(loginSelectors.appLogo).should('contain', 'Swag Labs');
-        cy.get(loginSelectors.title).should('contain', 'Your Cart');
-        cy.get(addtocartSelectors.cartQuantityLabel).should('contain', 'QTY');
-        cy.get(addtocartSelectors.cartDescLabel).should('contain', 'Description');
+        cy.get(loginSelectors.appLogo).should('contain', text.swagLabs);
+        cy.get(loginSelectors.title).should('contain', text.yourCart);
+        cy.get(addtocartSelectors.cartQuantityLabel).should('contain', text.qty);
+        cy.get(addtocartSelectors.cartDescLabel).should('contain', text.description);
 
-        cy.get(addtocartSelectors.cartList).should('contain', 'Sauce Labs Backpack');
-        cy.get(addtocartSelectors.cartList).should('contain', 'Sauce Labs Bolt T-Shirt');
-        cy.get(addtocartSelectors.cartList).should('contain', 'Sauce Labs Onesie');
-        cy.get(addtocartSelectors.cartList).should('contain', 'Sauce Labs Fleece Jacket');
+        cy.get(addtocartSelectors.cartList).should('contain', text.sauceLabsBackpack);
+        cy.get(addtocartSelectors.cartList).should('contain', text.boltTshirt);
+        cy.get(addtocartSelectors.cartList).should('contain', text.sauceLabsOnesie);
+        cy.get(addtocartSelectors.cartList).should('contain', text.fleeceJacket);
 
-        cy.get(addtocartSelectors.itemPriceBar).should('contain', '$29.99');
-        cy.get(addtocartSelectors.itemPriceBar).should('contain', '$15.99');
-        cy.get(addtocartSelectors.itemPriceBar).should('contain', '$7.99');
-        cy.get(addtocartSelectors.itemPriceBar).should('contain', '$49.99');
+        cy.get(addtocartSelectors.itemPriceBar).should('contain', text.thirty);
+        cy.get(addtocartSelectors.itemPriceBar).should('contain', text.sixteen);
+        cy.get(addtocartSelectors.itemPriceBar).should('contain', text.eight);
+        cy.get(addtocartSelectors.itemPriceBar).should('contain', text.fifty);
 
 
 
         cy.get(addtocartSelectors.button).should('be.visible')
-        .and('contain', 'Remove')
+        .and('contain', text.remove)
         .and('be.enabled');
 
 
@@ -159,11 +160,11 @@ describe("add product to cart", ()=>{
 
 
         cy.get(addtocartSelectors.button).should('be.visible')
-        .and('contain', 'Continue Shopping')
+        .and('contain', text.continueShopping)
         .and('be.enabled');
 
         cy.get(addtocartSelectors.button).should('be.visible')
-        .and('contain', 'Checkout')
+        .and('contain', text.checkout)
         .and('be.enabled');
 
 
@@ -171,20 +172,20 @@ describe("add product to cart", ()=>{
 
         //remove product one from the cart
         cy.get(addtocartSelectors.removeBoltTshirt).click();
-        cy.get(addtocartSelectors.cartBadge).should('have.text', '3');
-        cy.get(addtocartSelectors.cartList).should('not.contain', 'Sauce Labs Bolt T-Shirt');
-        cy.get(addtocartSelectors.itemPriceBar).should('not.contain', '$15.99');
+        cy.get(addtocartSelectors.cartBadge).should('have.text', text.three);
+        cy.get(addtocartSelectors.cartList).should('not.contain', text.boltTshirt);
+        cy.get(addtocartSelectors.itemPriceBar).should('not.contain', text.sixteen);
 
 
         //remove product two from the cart
         cy.get(addtocartSelectors.removeOnesie).click();
-        cy.get(addtocartSelectors.cartBadge).should('have.text', '2');
-        cy.get(addtocartSelectors.cartList).should('not.contain', 'Sauce Labs Onesie');
-        cy.get(addtocartSelectors.itemPriceBar).should('not.contain', '$7.99');
+        cy.get(addtocartSelectors.cartBadge).should('have.text', text.two);
+        cy.get(addtocartSelectors.cartList).should('not.contain', text.sauceLabsOnesie);
+        cy.get(addtocartSelectors.itemPriceBar).should('not.contain', text.eight);
 
         cy.get(addtocartSelectors.continueShopping).click();
         cy.url().should('include', '/inventory.html');
-        cy.get(loginSelectors.title).should('have.text', 'Products');
+        cy.get(loginSelectors.title).should('have.text', text.products);
         cy.get(loginSelectors.productSort).should('be.visible');
 
         
@@ -195,32 +196,32 @@ describe("add product to cart", ()=>{
         //checkout step one
         cy.url().should('include', '/checkout-step-one.html');
 
-        cy.get(loginSelectors.appLogo).should('have.text', 'Swag Labs')
+        cy.get(loginSelectors.appLogo).should('have.text', text.swagLabs)
         .and('be.visible');
 
-        cy.get(loginSelectors.title).should('have.text', 'Checkout: Your Information')
+        cy.get(loginSelectors.title).should('have.text', text.yourInformation)
         .and('be.visible');
 
-        cy.get(addtocartSelectors.firstName).should('have.attr', 'placeholder', 'First Name')
+        cy.get(addtocartSelectors.firstName).should('have.attr', 'placeholder', text.firstName)
         .and('be.visible')
         .and('be.enabled');
 
-        cy.get(addtocartSelectors.lastName).should('have.attr', 'placeholder', 'Last Name')
+        cy.get(addtocartSelectors.lastName).should('have.attr', 'placeholder', text.lastName)
         .and('be.visible')
         .and('be.enabled');
 
 
-        cy.get(addtocartSelectors.postalCode).should('have.attr', 'placeholder', 'Zip/Postal Code')
+        cy.get(addtocartSelectors.postalCode).should('have.attr', 'placeholder', text.zipCode)
         .and('be.visible')
         .and('be.enabled');
 
         
-        cy.get(addtocartSelectors.cancelButton).should('have.text', 'Cancel')
+        cy.get(addtocartSelectors.cancelButton).should('have.text', text.cancel)
         .and('be.visible')
         .and('not.be.disabled');
 
 
-        cy.get(addtocartSelectors.continueButton).should('have.value', 'Continue')
+        cy.get(addtocartSelectors.continueButton).should('have.value', text.continue)
         .and('be.visible')
         .and('not.be.disabled');
 
@@ -229,9 +230,9 @@ describe("add product to cart", ()=>{
         // cancel button functionality 
         cy.get(addtocartSelectors.cancelButton).click();
         cy.url().should('include', '/cart.html');
-        cy.get(loginSelectors.title).should('have.text', 'Your Cart');
-        cy.get(addtocartSelectors.cartQuantityLabel).should('have.text', 'QTY');
-        cy.get(addtocartSelectors.cartDescLabel).should('have.text', 'Description');
+        cy.get(loginSelectors.title).should('have.text', text.yourCart);
+        cy.get(addtocartSelectors.cartQuantityLabel).should('have.text', text.qty);
+        cy.get(addtocartSelectors.cartDescLabel).should('have.text', text.description);
 
         cy.get(addtocartSelectors.checkOut).click();
 
@@ -250,15 +251,15 @@ describe("add product to cart", ()=>{
         cy.get(addtocartSelectors.continueButton).click();
 
         cy.get(loginSelectors.errorMessage).should('be.visible')
-        .and('have.text', 'Error: First Name is required');
+        .and('have.text', text.noFirstName);
 
         cy.get(loginSelectors.errorButton).should('be.visible')
         .and('be.enabled')
         .click();
 
 
-        cy.get(loginSelectors.form).should('not.contain', 'Error: First Name is required');
-        cy.get(addtocartSelectors.errorMessageContainer).should('not.contain', 'Error: First Name is required');
+        cy.get(loginSelectors.form).should('not.contain', text.noFirstName);
+        cy.get(addtocartSelectors.errorMessageContainer).should('not.contain', text.noFirstName);
 
 
         // checkout with empty last name field
@@ -273,15 +274,15 @@ describe("add product to cart", ()=>{
         cy.get(addtocartSelectors.continueButton).click();
 
         cy.get(loginSelectors.errorMessage).should('be.visible')
-        .and('have.text', 'Error: Last Name is required');
+        .and('have.text', text.noLastName);
 
         cy.get(loginSelectors.errorButton).should('be.visible')
         .and('be.enabled')
         .click();
 
 
-        cy.get(loginSelectors.form).should('not.contain', 'Error: Last Name is required');
-        cy.get(addtocartSelectors.errorMessageContainer).should('not.contain', 'Error: Last Name is required');
+        cy.get(loginSelectors.form).should('not.contain', text.noLastName);
+        cy.get(addtocartSelectors.errorMessageContainer).should('not.contain', text.noLastName);
 
 
 
@@ -297,15 +298,15 @@ describe("add product to cart", ()=>{
         cy.get(addtocartSelectors.continueButton).click();
 
         cy.get(loginSelectors.errorMessage).should('be.visible')
-        .and('have.text', 'Error: Postal Code is required');
+        .and('have.text', text.noPostalCode);
 
         cy.get(loginSelectors.errorButton).should('be.visible')
         .and('be.enabled')
         .click();
 
 
-        cy.get(loginSelectors.form).should('not.contain', 'Error: Postal Code is required');
-        cy.get(addtocartSelectors.errorMessageContainer).should('not.contain', 'Error: Postal Code is required');
+        cy.get(loginSelectors.form).should('not.contain', text.noPostalCode);
+        cy.get(addtocartSelectors.errorMessageContainer).should('not.contain', text.noPostalCode);
         
 
 
@@ -319,15 +320,15 @@ describe("add product to cart", ()=>{
         cy.get(addtocartSelectors.continueButton).click();
 
         cy.get(loginSelectors.errorMessage).should('be.visible')
-        .and('have.text', 'Error: First Name is required');
+        .and('have.text', text.noFirstName);
 
         cy.get(loginSelectors.errorButton).should('be.visible')
         .and('be.enabled')
         .click();
 
 
-        cy.get(loginSelectors.form).should('not.contain', 'Error: First Name is required');
-        cy.get(addtocartSelectors.errorMessageContainer).should('not.contain', 'Error: First Name is required');
+        cy.get(loginSelectors.form).should('not.contain', text.noFirstName);
+        cy.get(addtocartSelectors.errorMessageContainer).should('not.contain', text.noFirstName);
 
 
         // checkout with valid firstname, lastname and postal code
@@ -343,30 +344,30 @@ describe("add product to cart", ()=>{
         cy.get(addtocartSelectors.continueButton).click();
 
         cy.url().should('include', '/checkout-step-two.html');
-        cy.get(loginSelectors.appLogo).should('have.text', 'Swag Labs');
-        cy.get(loginSelectors.title).should('have.text', 'Checkout: Overview');
+        cy.get(loginSelectors.appLogo).should('have.text', text.swagLabs);
+        cy.get(loginSelectors.title).should('have.text', text.checkoutOverview);
 
-        cy.get(addtocartSelectors.cartList).should('contain', 'Sauce Labs Backpack');
-        cy.get(loginSelectors.itemPrice).should('contain', '$29.99');
+        cy.get(addtocartSelectors.cartList).should('contain', text.sauceLabsBackpack);
+        cy.get(loginSelectors.itemPrice).should('contain', text.thirty);
 
-        cy.get(addtocartSelectors.cartList).should('contain', 'Sauce Labs Fleece Jacket');
-        cy.get(loginSelectors.itemPrice).should('contain', '$49.99');
+        cy.get(addtocartSelectors.cartList).should('contain', text.fleeceJacket);
+        cy.get(loginSelectors.itemPrice).should('contain', text.fifty);
 
-        cy.get(addtocartSelectors.paymentLabel).should('have.text', 'Payment Information:');
-        cy.get(addtocartSelectors.PaymentValue).should('have.text', 'SauceCard #31337');
-        cy.get(addtocartSelectors.shippingLabel).should('have.text', 'Shipping Information:');
-        cy.get(addtocartSelectors.shippingValue).should('have.text', 'Free Pony Express Delivery!');
-        cy.get(addtocartSelectors.totalInfoLabel).should('have.text', 'Price Total');
-        cy.get(addtocartSelectors.subTotalLabel).should('have.text', 'Item total: $79.98');
-        cy.get(addtocartSelectors.taxLabel).should('have.text', 'Tax: $6.40');
-        cy.get(addtocartSelectors.totalLabel).should('have.text', 'Total: $86.38');
+        cy.get(addtocartSelectors.paymentLabel).should('have.text', text.paymentInformation);
+        cy.get(addtocartSelectors.PaymentValue).should('have.text', text.sauceCard);
+        cy.get(addtocartSelectors.shippingLabel).should('have.text', text.shippingInformation);
+        cy.get(addtocartSelectors.shippingValue).should('have.text', text.expressDelivery);
+        cy.get(addtocartSelectors.totalInfoLabel).should('have.text', text.priceTotal);
+        cy.get(addtocartSelectors.subTotalLabel).should('have.text', text.itemTotal);
+        cy.get(addtocartSelectors.taxLabel).should('have.text', text.tax);
+        cy.get(addtocartSelectors.totalLabel).should('have.text', text.total);
 
         cy.get(addtocartSelectors.cancelButton).should('be.visible')
-        .and('have.text', 'Cancel')
+        .and('have.text', text.cancel)
         .and('be.enabled');
 
         cy.get(addtocartSelectors.finishButton).should('be.visible')
-        .and('have.text', 'Finish')
+        .and('have.text', text.finish)
         .and('be.enabled');
 
 
@@ -374,7 +375,7 @@ describe("add product to cart", ()=>{
         cy.get(addtocartSelectors.cancelButton).click();
         cy.url().should('include', '/inventory.html');
         cy.get(loginSelectors.title).should('be.visible')
-        .and('have.text', 'Products');
+        .and('have.text', text.products);
 
         cy.get(loginSelectors.shoppingCartContainer).click();
         cy.get(addtocartSelectors.checkOut).click();
@@ -393,22 +394,22 @@ describe("add product to cart", ()=>{
         cy.get(addtocartSelectors.finishButton).click();
 
         cy.url().should('include', '/checkout-complete.html');
-        cy.get(loginSelectors.appLogo).should('have.text', 'Swag Labs');
-        cy.get(loginSelectors.title).should('have.text', 'Checkout: Complete!')
+        cy.get(loginSelectors.appLogo).should('have.text', text.swagLabs);
+        cy.get(loginSelectors.title).should('have.text', text.checkoutComplete)
         .and('be.visible');
         
         cy.get(addtocartSelectors.ponyExpress).should('be.visible');
-        cy.get(addtocartSelectors.completeHeader).should('have.text', 'Thank you for your order!');
-        cy.get(addtocartSelectors.completeText).should('have.text', 'Your order has been dispatched, and will arrive just as fast as the pony can get there!');
+        cy.get(addtocartSelectors.completeHeader).should('have.text', text.thankYouMessage);
+        cy.get(addtocartSelectors.completeText).should('have.text', text.dispatchMessage);
 
         cy.get(addtocartSelectors.backHomeButton).should('be.visible')
-        .and('have.text', 'Back Home')
+        .and('have.text', text.backHome)
         .and('be.enabled')
         .click();
 
         cy.url().should('include', '/inventory.html');
         cy.get(loginSelectors.title).should('be.visible')
-        .and('have.text', 'Products');
+        .and('have.text', text.products);
         cy.get(loginSelectors.backPackImg).should('be.visible');
 
 

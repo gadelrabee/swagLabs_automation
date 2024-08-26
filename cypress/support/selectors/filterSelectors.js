@@ -9,6 +9,10 @@ export const filterSelectors = {
 
 
     // product sort selectors
+    az: "az",
+    za: "za",
+    lohi: "lohi",
+    hilo: "hilo",
     selectContainer: '.select_container',
     option: 'option',
 

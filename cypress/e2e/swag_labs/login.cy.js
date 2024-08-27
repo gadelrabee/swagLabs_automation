@@ -90,7 +90,7 @@ describe ('Login test', ()=>{
     it('login with valid username and empty password',()=>{
 
         cy.get(loginSelectors.userName).clear()
-        .type('standard_user');
+        .type(login_credential.username);
 
         cy.get(loginSelectors.passWord).clear();
 
@@ -139,7 +139,7 @@ describe ('Login test', ()=>{
         .type("locked_out_user");
 
         cy.get(loginSelectors.passWord).clear()
-        .type('secret_sauce');
+        .type(login_credential.password);
 
         cy.get(loginSelectors.loginButton).click();
 
@@ -162,7 +162,7 @@ describe ('Login test', ()=>{
         .type("problem_user");
 
         cy.get(loginSelectors.passWord).clear()
-        .type('secret_sauce');
+        .type(login_credential.password);
 
         cy.get(loginSelectors.loginButton).click();
 
@@ -185,7 +185,7 @@ describe ('Login test', ()=>{
         .type("performance_glitch_user");
 
         cy.get(loginSelectors.passWord).clear()
-        .type('secret_sauce');
+        .type(login_credential.password);
 
         cy.get(loginSelectors.loginButton).click();
 
@@ -207,7 +207,7 @@ describe ('Login test', ()=>{
         .type("error_user");
 
         cy.get(loginSelectors.passWord).clear()
-        .type('secret_sauce');
+        .type(login_credential.password);
 
         cy.get(loginSelectors.loginButton).click();
 
@@ -230,7 +230,7 @@ describe ('Login test', ()=>{
         .type("visual_user");
 
         cy.get(loginSelectors.passWord).clear()
-        .type('secret_sauce');
+        .type(login_credential.password);
 
         cy.get(loginSelectors.loginButton).click();
 

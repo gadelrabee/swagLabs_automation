@@ -7,6 +7,7 @@ export  const text = {
     userName: 'Username',
     password: 'Password',
     logIn: 'Login',
+    noMatch: 'Epic sadface: Username and password do not match any user in this service',
     noUserName: 'Epic sadface: Username is required',
     noPassword: 'Epic sadface: Password is required',
     lockedOut: 'Epic sadface: Sorry, this user has been locked out.',

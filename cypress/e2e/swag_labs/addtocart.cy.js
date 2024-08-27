@@ -1,76 +1,98 @@
 import { addtocartSelectors } from"../../support/selectors/addToCart";
 import { loginSelectors } from "../../support/selectors/loginSelectors";
-import {text} from "../../support/text_message";
+import { text } from "../../support/text_message";
 import login_credential from "../../fixtures/login_credentials.json";
 import checkoutData from "../../fixtures/checkoutData.json";
+
+
+
+
+//custom command to add the product to the cart
+function addtocart(productLink, url, applogo, swagLabs, secHeader, backtoProduct, itemImg,itemname, productname, 
+    itemdescription, description, itemprice, price, addtoCart, addTocart, removebutton, Remove, badge, number){
+        cy.get(productLink).should('be.visible')
+        .click()
+
+        cy.url().should('include', url);
+        cy.get(applogo).should('have.text', swagLabs);
+        cy.get(secHeader).should('have.text', backtoProduct)
+        .and('be.visible')
+        .and('not.be.disabled');
+        cy.get(itemImg).should('be.visible');
+        cy.get(itemname).should('have.text',productname);
+        cy.get(itemdescription).should('have.text', description);
+        cy.get(itemprice).should('have.text', price);
+
+        cy.get(addtoCart).should('be.visible')
+        .and('have.text', addTocart)
+        .and('be.enabled')
+        .click();
+
+        cy.get(removebutton).should('be.visible')
+        .and('have.text', Remove)
+        .and('be.enabled');
+
+        cy.get(badge).should('have.text', number);
+
+    };
 
 describe("add product to cart", ()=>{
     it('add products to the cart, remove and checkout', ()=>{
 
         // login to the page
-        cy.visit('https://www.saucedemo.com/');
+        cy.open_page();
 
-        cy.get(loginSelectors.userName).clear()
-        .type(login_credential.username);
-
-        cy.get(loginSelectors.passWord).clear()
-        .type(login_credential.password);
-
-        cy.get(loginSelectors.loginButton).click();
+        cy.login(login_credential.username, login_credential.password);
 
         cy.url().should('include', '/inventory.html');
 
 
         // add first product to the cart
-        cy.get(loginSelectors.backPackImg).should('be.visible')
-        .click()
-
-        cy.url().should('include', '/inventory-item.html?id=4');
-        cy.get(loginSelectors.appLogo).should('have.text', text.swagLabs);
-        cy.get(addtocartSelectors.secondaryHeader).should('have.text', text.backToProducts)
-        .and('be.visible')
-        .and('not.be.disabled');
-        cy.get(addtocartSelectors.backPackImg).should('be.visible');
-        cy.get(loginSelectors.itemName).should('have.text',text.sauceLabsBackpack);
-        cy.get(loginSelectors.itemDescription).should('have.text', text.backPackDesc);
-        cy.get(loginSelectors.itemPrice).should('have.text', text.thirty);
-
-        cy.get(addtocartSelectors.addToCart).should('be.visible')
-        .and('have.text', text.addToCart)
-        .and('be.enabled')
-        .click();
-
-        cy.get(addtocartSelectors.removeButton).should('be.visible')
-        .and('have.text', text.remove)
-        .and('be.enabled');
-
-        cy.get(addtocartSelectors.cartBadge).should('have.text', text.one);
+        addtocart(addtocartSelectors.backPackLink, 
+            text.inventoryId4, 
+            loginSelectors.appLogo, 
+            text.swagLabs, 
+            addtocartSelectors.secondaryHeader, 
+            text.backToProducts,
+            addtocartSelectors.backPackImg,
+            loginSelectors.itemName,
+            text.sauceLabsBackpack,
+            loginSelectors.itemDescription,
+            text.backPackDesc,
+            loginSelectors.itemPrice,
+            text.thirty,
+            addtocartSelectors.addToCart,
+            text.addToCart,
+            addtocartSelectors.removeButton,
+            text.remove,
+            addtocartSelectors.cartBadge,
+            text.one
+        );
 
         cy.go('back');
 
 
         // add second product to the cart
-        cy.get(addtocartSelectors.boltTshirtLink).should('be.visible')
-        .click()
-
-        cy.url().should('include', '/inventory-item.html?id=1');
-        cy.get(loginSelectors.appLogo).should('have.text', text.swagLabs);
-        cy.get(addtocartSelectors.secondaryHeader).should('have.text', text.backToProducts);
-        cy.get(addtocartSelectors.boltTshirtImg).should('be.visible');
-        cy.get(loginSelectors.itemName).should('have.text',text.boltTshirt);
-        cy.get(loginSelectors.itemDescription).should('have.text', text.boltTshirtDesc);
-        cy.get(loginSelectors.itemPrice).should('have.text', text.sixteen);
-
-        cy.get(addtocartSelectors.addToCart).should('be.visible')
-        .and('have.text', text.addToCart)
-        .and('be.enabled')
-        .click();
-
-        cy.get(addtocartSelectors.removeButton).should('be.visible')
-        .and('have.text', text.remove)
-        .and('be.enabled');
-
-        cy.get(addtocartSelectors.cartBadge).should('have.text', text.two);
+        addtocart(addtocartSelectors.boltTshirtLink,
+            text.inventoryId1,
+            loginSelectors.appLogo,
+            text.swagLabs,
+            addtocartSelectors.secondaryHeader,
+            text.backToProducts,
+            addtocartSelectors.boltTshirtImg,
+            loginSelectors.itemName,
+            text.boltTshirt,
+            loginSelectors.itemDescription,
+            text.boltTshirtDesc,
+            loginSelectors.itemPrice,
+            text.sixteen,
+            addtocartSelectors.addToCart,
+            text.addToCart,
+            addtocartSelectors.removeButton,
+            text.remove,
+            addtocartSelectors.cartBadge,
+            text.two
+        ),
 
         cy.go('back');
 
@@ -81,52 +103,55 @@ describe("add product to cart", ()=>{
 
 
         // add third product to the cart
-        cy.get(addtocartSelectors.onesieLink).should('be.visible')
-        .click()
 
-        cy.url().should('include', '/inventory-item.html?id=2');
-        cy.get(loginSelectors.appLogo).should('have.text', text.swagLabs);
-        cy.get(addtocartSelectors.secondaryHeader).should('have.text', text.backToProducts);
-        cy.get(addtocartSelectors.onesieImg).should('be.visible');
-        cy.get(loginSelectors.itemName).should('have.text',text.sauceLabsOnesie);
-        cy.get(loginSelectors.itemDescription).should('have.text', text.onesieDesc);
-        cy.get(loginSelectors.itemPrice).should('have.text', text.eight);
+        addtocart(addtocartSelectors.onesieLink,
+            text.inventoryId2,
+            loginSelectors.appLogo,
+            text.swagLabs,
+            addtocartSelectors.secondaryHeader,
+            text.backToProducts,
+            addtocartSelectors.onesieImg,
+            loginSelectors.itemName,
+            text.sauceLabsOnesie,
+            loginSelectors.itemDescription,
+            text.onesieDesc,
+            loginSelectors.itemPrice,
+            text.eight,
+            addtocartSelectors.addToCart,
+            text.addToCart,
+            addtocartSelectors.removeButton,
+            text.remove,
+            addtocartSelectors.cartBadge,
+            text.three,
 
-        cy.get(addtocartSelectors.addToCart).should('be.visible')
-        .and('have.text', text.addToCart)
-        .and('be.enabled')
-        .click();
+        );
 
-        cy.get(addtocartSelectors.removeButton).should('be.visible')
-        .and('have.text', text.remove)
-        .and('be.enabled');
-
-        cy.get(addtocartSelectors.cartBadge).should('have.text', text.three);
-
+    
         cy.go('back');
 
         // add fourth product to the cart
-        cy.get(addtocartSelectors.fleeceJacketLink).should('be.visible')
-        .click()
+        addtocart(addtocartSelectors.fleeceJacketLink,
+            text.inventoryId5,
+            loginSelectors.appLogo,
+            text.swagLabs,
+            addtocartSelectors.secondaryHeader,
+            text.backToProducts,
+            addtocartSelectors.fleeceJacketImg,
+            loginSelectors.itemName,
+            text.fleeceJacket,
+            loginSelectors.itemDescription,
+            text.fleeceJacketDesc,
+            loginSelectors.itemPrice,
+            text.fifty,
+            addtocartSelectors.addToCart,
+            text.addToCart,
+            addtocartSelectors.removeButton,
+            text.remove,
+            addtocartSelectors.cartBadge,
+            text.four
 
-        cy.url().should('include', '/inventory-item.html?id=5');
-        cy.get(loginSelectors.appLogo).should('have.text', text.swagLabs);
-        cy.get(addtocartSelectors.secondaryHeader).should('have.text', text.backToProducts);
-        cy.get(addtocartSelectors.fleeceJacketImg).should('be.visible');
-        cy.get(loginSelectors.itemName).should('have.text', text.fleeceJacket);
-        cy.get(loginSelectors.itemDescription).should('have.text', text.fleeceJacketDesc);
-        cy.get(loginSelectors.itemPrice).should('have.text', text.fifty);
-
-        cy.get(addtocartSelectors.addToCart).should('be.visible')
-        .and('have.text', text.addToCart)
-        .and('be.enabled')
-        .click();
-
-        cy.get(addtocartSelectors.removeButton).should('be.visible')
-        .and('have.text', text.remove)
-        .and('be.enabled');
-
-        cy.get(addtocartSelectors.cartBadge).should('have.text', text.four);
+        );
+        
 
         cy.go('back');
 

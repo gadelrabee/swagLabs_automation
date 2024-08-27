@@ -35,6 +35,11 @@ export  const text = {
     onesieDesc: "Rib snap infant onesie for the junior automation engineer in development. Reinforced 3-snap bottom closure, two-needle hemmed sleeved and bottom won't unravel.",
     fleeceJacketDesc: "It's not every day that you come across a midweight quarter-zip fleece jacket capable of handling everything from a relaxing day outdoors to a busy day at the office.",
 
+    //url endpoints 
+    inventoryId1:  '/inventory-item.html?id=1',
+    inventoryId2: '/inventory-item.html?id=2',
+    inventoryId4: '/inventory-item.html?id=4',
+    inventoryId5: '/inventory-item.html?id=5',
 
     //add to cart texts
     backToProducts: 'Back to products',

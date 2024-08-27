@@ -3,7 +3,8 @@ import { loginSelectors } from "../../support/selectors/loginSelectors";
 import {text} from  "../../support/text_message";
 import login_credential from "../../fixtures/login_credentials.json";
 import { loginPage } from "../../pages/loginpage";
-const loginObj = new loginPage();
+
+
 
 describe ('Login test', ()=>{
 
@@ -11,34 +12,19 @@ describe ('Login test', ()=>{
     
     beforeEach(()=>{
         
-        loginObj.openSwagLabs()
-        cy.url().should('eq', 'https://www.saucedemo.com/');
-        cy.contains(text.swagLabs);
-            
-        // placeholders should be visible and clickable
-        cy.get(loginSelectors.userName).should('have.attr', 'placeholder', text.userName).and('be.enabled');
-        cy.get(loginSelectors.passWord).should('have.attr', 'placeholder', text.password).and('be.enabled');
-        cy.get(loginSelectors.loginButton).should('have.value', text.logIn).and('be.enabled');
+       cy.open_page();
         
-        
-    });
+     });
         
 
 
-    
-       
-     
     //login with incorrect username
 
     it('login with incorrect username',()=>{
         
-        loginObj.enterUserName("rabeendra");
-        loginObj.enterPassword(login_credential.password);
-        loginObj.clickLoginButton();
+        cy.login('rabeendra', login_credential.password)
 
         cy.get(loginSelectors.errorMessage).should('have.text', text.noMatch);
-
-    
 
     });
 
@@ -48,13 +34,9 @@ describe ('Login test', ()=>{
     it('valid username and invalid paswword',()=>{
         
 
-        loginObj.enterUserName(login_credential.username);
-        loginObj.enterPassword("TESTEETR");
-        loginObj.clickLoginButton();
+        cy.login(login_credential.username, 'password');
 
         cy.get(loginSelectors.errorMessage).should('have.text',text.noMatch);
-
-    
 
     });
 
@@ -63,10 +45,7 @@ describe ('Login test', ()=>{
 
     it("login with empty username and valid password", ()=>{
 
-        loginObj.enterUserName();
-        loginObj.enterPassword(login_credential.password);
-        loginObj.clickLoginButton();
-
+        cy.login(login_credential.password);
         cy.get(loginSelectors.errorMessage).should('have.text', text.noUserName);
         cy.get(loginSelectors.errorButton).should('be.visible')
         .and('be.enabled')
@@ -82,28 +61,22 @@ describe ('Login test', ()=>{
 
     it('login with valid username and empty password',()=>{
 
-        loginObj.enterUserName(login_credential.username);
-        loginObj.enterPassword();
-        loginObj.clickLoginButton();
+        cy.login(login_credential.username);
 
         cy.get(loginSelectors.errorMessage).should('have.text', text.noPassword);
         cy.get(loginSelectors.errorButton).should('be.visible')
         .and('be.enabled')
         .click();
         cy.get(loginSelectors.form).should('not.contain',text.noPassword);
-        
-        
 
     });
     
     
 
-     // login with empty username and password
-     it('login with empty username and password',()=>{
+    // login with empty username and password
+    it('login with empty username and password',()=>{
 
-        loginObj.enterUserName();
-        loginObj.enterPassword();
-        loginObj.clickLoginButton();
+        cy.login();
 
         cy.get(loginSelectors.errorMessage).should('have.text', text.noUserName);
         cy.get(loginSelectors.errorButton).should('be.visible')
@@ -111,9 +84,6 @@ describe ('Login test', ()=>{
         .click();
         cy.get(loginSelectors.form).should('not.contain',text.noUserName);
         
-
-
-
     });
     
 
@@ -121,10 +91,7 @@ describe ('Login test', ()=>{
     // Login with locked_out_user
     it('Login with locked_out_user',()=>{
         
-
-        loginObj.enterUserName('locked_out_user');
-        loginObj.enterPassword(login_credential.password);
-        loginObj.clickLoginButton();
+        cy.login('locked_out_user', login_credential.password);
 
         cy.get(loginSelectors.errorMessage).should('have.text', text.lockedOut);
         cy.get(loginSelectors.errorButton).should('be.visible')
@@ -132,25 +99,18 @@ describe ('Login test', ()=>{
         .click();
         cy.get(loginSelectors.form).should('not.contain',text.lockedOut); 
 
-
-
     });
 
 
     // Login with problem_user
     it('Login with problem_user',()=>{
         
-
-        loginObj.enterUserName('problem_user');
-        loginObj.enterPassword(login_credential.password);
-        loginObj.clickLoginButton();
+        cy.login('problem_user', login_credential.password);
 
         cy.url().should('include', '/inventory.html');
         cy.get(loginSelectors.appLogo).should('have.text', text.swagLabs);
         cy.get(loginSelectors.title).should('have.text', text.products);
         cy.get(loginSelectors.backPackImg).should('be.visible');
-
-       
 
     });
 
@@ -160,9 +120,7 @@ describe ('Login test', ()=>{
     it('Login with performance_glitch_user',()=>{
         
 
-        loginObj.enterUserName("performance_glitch_user");
-        loginObj.enterPassword(login_credential.password);
-        loginObj.clickLoginButton();
+        cy.login('performance_glitch_user', login_credential.password);
 
         cy.url().should('include', '/inventory.html');
         cy.get(loginSelectors.appLogo).should('have.text', text.swagLabs);
@@ -178,17 +136,12 @@ describe ('Login test', ()=>{
         
     it('Login with error_user',()=>{
         
-        loginObj.enterUserName("error_user");
-        loginObj.enterPassword(login_credential.password);
-        loginObj.clickLoginButton();
+        cy.login('error_user', login_credential.password);
 
         cy.url().should('include', '/inventory.html');
         cy.get(loginSelectors.appLogo).should('have.text', text.swagLabs);
         cy.get(loginSelectors.title).should('have.text', text.products);
         cy.get(loginSelectors.backPackImg).should('be.visible');
-
-    
-
 
     });
     
@@ -197,9 +150,7 @@ describe ('Login test', ()=>{
 
     it('Login with visual_user',()=>{
         
-        loginObj.enterUserName("visual_user");
-        loginObj.enterPassword(login_credential);
-        loginObj.clickLoginButton();
+        cy.login('visual_user', login_credential.password);
 
         cy.url().should('include', '/inventory.html');
         cy.get(loginSelectors.appLogo).should('have.text', text.swagLabs);
@@ -213,9 +164,7 @@ describe ('Login test', ()=>{
 
     it.only('page assertion after login',()=>{
         
-        loginObj.enterUserName(login_credential.username);
-        loginObj.enterPassword(login_credential.password);
-        loginObj.clickLoginButton();
+        cy.login(login_credential.username, login_credential.password);
 
         cy.url().should('include','/inventory.html');
         cy.get(loginSelectors.appLogo).should('have.text', text.swagLabs);
@@ -247,15 +196,11 @@ describe ('Login test', ()=>{
         .and('have.text', text.addToCart)
         .and('be.enabled');
 
-
         cy.get(loginSelectors.appLogo).scrollIntoView();
 
         
-
-
         // Logout
-        cy.get(loginSelectors.burgerMenu).should('be.visible')
-        .and('be.enabled').click();
+        cy.get(loginSelectors.burgerMenu).click();
 
         cy.get(loginSelectors.logOut).should('have.text', text.logout)
         .and('have.attr', 'href', '#')

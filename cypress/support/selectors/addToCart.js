@@ -5,8 +5,11 @@ export const addtocartSelectors = {
     addToCart: '#add-to-cart',
     removeButton: '#remove',
     cartBadge: 'span[data-test="shopping-cart-badge"]',
+   
+
 
     //inventory page selectors
+    backPackLink: '#item_4_title_link',
     backPackImg: 'img[data-test="item-sauce-labs-backpack-img"]',
     boltTshirtLink: '#item_1_title_link',
     boltTshirtImg: 'img[data-test="item-sauce-labs-bolt-t-shirt-img"]',

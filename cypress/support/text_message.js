@@ -36,7 +36,7 @@ export  const text = {
     fleeceJacketDesc: "It's not every day that you come across a midweight quarter-zip fleece jacket capable of handling everything from a relaxing day outdoors to a busy day at the office.",
 
     //url endpoints 
-    inventoryId1:  '/inventory-item.html?id=1',
+    inventoryId1: '/inventory-item.html?id=1',
     inventoryId2: '/inventory-item.html?id=2',
     inventoryId4: '/inventory-item.html?id=4',
     inventoryId5: '/inventory-item.html?id=5',

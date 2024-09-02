@@ -5,19 +5,14 @@ import login_credential from "../../fixtures/login_credentials.json";
 import { loginPage } from "../../pages/loginpage";
 
 
-
 describe ('Login test', ()=>{
 
-    
-    
     beforeEach(()=>{
         
        cy.open_page();
         
      });
         
-
-
     //login with incorrect username
 
     it('login with incorrect username',()=>{
@@ -51,7 +46,6 @@ describe ('Login test', ()=>{
         .and('be.enabled')
         .click();
         cy.get(loginSelectors.form).should('not.contain',text.noUserName);
-
 
     });
 
@@ -127,9 +121,7 @@ describe ('Login test', ()=>{
         cy.get(loginSelectors.title).should('have.text', text.products);
         cy.get(loginSelectors.backPackImg).should('be.visible');
 
-        
-
-    });
+         });
 
 
     // Login with error_user

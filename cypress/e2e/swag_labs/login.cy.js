@@ -82,7 +82,7 @@ describe ('Login test', ()=>{
     
 
 
-    // Login with locked_out_user
+    // Login with locked_out_userSS
     it('Login with locked_out_user',()=>{
         
         cy.login('locked_out_user', login_credential.password);
@@ -121,7 +121,7 @@ describe ('Login test', ()=>{
         cy.get(loginSelectors.title).should('have.text', text.products);
         cy.get(loginSelectors.backPackImg).should('be.visible');
 
-         });
+    });
 
 
     // Login with error_user
